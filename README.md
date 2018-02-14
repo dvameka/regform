@@ -31,7 +31,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 1. ng new <app name>
 2. npm install bootstrap --save
-3. Added bootstrap css and js into the .angular-cli.json
+3. Add bootstrap css and js into the .angular-cli.json
 
 ```
 "styles": [
@@ -41,4 +41,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
       "scripts": [
         "../node_modules/bootstrap/dist/js/bootstrap.min.js"
       ],
+```
+4. Generate value object that holds all the user information 
+```
+ng g class shared/registration-user
+
 ```
