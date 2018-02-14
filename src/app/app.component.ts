@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  // this is to handle when I click on a submit or save button.
+  onSubmit(){
+
+  }
 }
