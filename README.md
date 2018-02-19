@@ -30,6 +30,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Development steps
 
 * ng new <app name>
+* Change directory to the app folder. <app name>
 * npm install bootstrap --save
 * Add bootstrap css and js into the .angular-cli.json
 
@@ -42,7 +43,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
         "../node_modules/bootstrap/dist/js/bootstrap.min.js"
       ],
 ```
-* Generate value object that holds all the user information 
+* Generate value object that holds all the user registration information 
 ```
 ng g class shared/registration-user
 
@@ -54,15 +55,20 @@ export class RegistrationUser {
         public email: string,
         public password: string,
         public confirmPassword: string,
-        public fullName: string,
+        public firstName: string,
+        public lastName: string,
         public gender: string,
         public dateOfBirth: Date,
         public address: string,
         public nationality: string,
-        public contactNumber: number
+        public contactNumber: string
     ){
 
     }
 }
 ```
+* Import formsModule from angular built in package. Inject it to the imports configuration. (app.module.ts)
 
+```
+import { FormsModule } from '@angular/forms';
+```
