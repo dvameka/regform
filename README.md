@@ -97,7 +97,7 @@ model = new RegistrationUser('','','','','','',null,'SG','','');
   ```
     gender: string[] = ['M', 'F'];
   ```
-  * Bind the rest of the fields. Except the nationalities is derived from an array which is declare under the app.component.ts
+  * Bind the rest of the fields. Exception to that the nationalities select list require to an array (complex javascript objec) to be declare under the app.component.ts as below:-
   ```
     nationalities = [ {desc:'Singapore', value:'SG'}, 
                     {desc: 'Malaysia', value:'MY'}, 
