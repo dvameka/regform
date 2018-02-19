@@ -233,7 +233,7 @@ model = new RegistrationUser('','','','','','',null,'','SG','');
         {{result}}
     </div>
 ```
- * Added an empty onChange function to handle the on change event for the nationalities drop down
+ * Add an empty onChange function to handle the on change event for the nationalities drop down
 ```javascript
     onChange(event){
 

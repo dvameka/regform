@@ -34,6 +34,6 @@ export class AppComponent {
   }
 
   onChange(event){
-
+    // empty function.
   }
 }

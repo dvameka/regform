@@ -87,9 +87,20 @@
             </div>
         </div>
         
-
         <div class="row" *ngIf="isSubmitted">
-            {{result}}
+            <div class="col-6" [ngStyle]="{'background-color':'blue'}">
+                    <div class="form-group">
+                            <label >{{result.email}}</label> 
+                    </div>    
+            </div>
+            <!--
+            <div class="col-6" [ngStyle]="{'background-color':'cyan'}">{{result.firstName}}</div>
+            <div class="col-6" [ngStyle]="{'background-color':'blue'}">{{result.lastName}}</div>
+            <div class="col-6" [ngStyle]="{'background-color':'cyan'}">{{result.gender}}</div>
+            <div class="col-6" [ngStyle]="{'background-color':'blue'}">{{result.address}}</div>
+            <div class="col-6" [ngStyle]="{'background-color':'cyan'}">{{result.dateOfBirth}}</div>
+            <div class="col-6" [ngStyle]="{'background-color':'blue'}">{{result.nationality}}</div>
+            <div class="col-6" [ngStyle]="{'background-color':'cyan'}">{{result.contactNumber}}</div>-->
         </div>
         
     </div>
