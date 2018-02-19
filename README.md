@@ -67,12 +67,12 @@ export class RegistrationUser {
 ```
 
  * Default all the form model values accordingly under the app.component.ts.
+ 
  ```
 import { RegistrationUser } from './shared/registration-user'
 
 model = new RegistrationUser('','','','','',null,'','','');
 
-// typescript class init
 constructor(){
 
 }
