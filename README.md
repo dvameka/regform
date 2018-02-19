@@ -34,7 +34,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 * npm install bootstrap --save
 * Add bootstrap css and js into the .angular-cli.json
 
-```
+```javascript
 "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "styles.css"
@@ -44,12 +44,12 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
       ],
 ```
 * Generate value object that holds all the user registration information 
-```
+```javascript
 ng g class shared/registration-user
 
 ```
 * Implement all the properties for the user registration form.
-```
+```javascript
 export class RegistrationUser {
     constructor(
         public email: string,
@@ -69,7 +69,7 @@ export class RegistrationUser {
 ```
 * Import formsModule from angular built in package. Inject it to the imports configuration. (app.module.ts)
 
-```
+```javascript
 import { FormsModule } from '@angular/forms';
 
 imports: [
@@ -79,7 +79,7 @@ imports: [
 ```
 * under the app.component.ts define the initialization declaration for the  user registration model. Third last argument we need to default the nationalities list to SG and the fourth field is a date field therefore we have to init the value to null.
 
-```
+```javascript
 model = new RegistrationUser('','','','','','',null,'','SG','');
 ```
 
@@ -94,18 +94,18 @@ model = new RegistrationUser('','','','','','',null,'','SG','');
   * Bind first name field with the model object first name attribute and define the first name variable against form the template variable. 
   * Bind last name field with the model object last name attribute and define the last name variable against form the template variable. 
   * Bind gender field with the model object gender attribute and define the gender variable against form the template variable. The radio button values of the gender field is derived from the array declare in the app.component.ts .
-  ```
+  ```javascript
     gender: string[] = ['M', 'F'];
   ```
   * Bind the rest of the fields. Exception to that the nationalities select list require to an array (complex javascript objec) to be declare under the app.component.ts as below:-
-  ```
+  ```javascript
     nationalities = [ {desc:'Singapore', value:'SG'}, 
                     {desc: 'Malaysia', value:'MY'}, 
                     {desc:'Thailand', value:'TH'},  
                     {desc:'Vietnam', value: 'VN'}];
   ``` 
   
-```
+```html
 <div class="container fluid">
         <div class="row">
             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
@@ -204,7 +204,7 @@ model = new RegistrationUser('','','','','','',null,'','SG','');
 ```
 
 * Add a submit button and reset button at the bottom of the contact number field. Implement event trigger on the reset button by invoking a built in reset function, angular framework automaitically will reset all binded fields.
-```
+```html
  <div class="form-group">
     <hr/>
     <button type="submit" [disabled]="!regForm.form.valid" class="btn btn-success">Submit</button>
@@ -212,7 +212,7 @@ model = new RegistrationUser('','','','','','',null,'','SG','');
 </div>
 ```
 * Under the app.component.ts onSubmit implemented capturing logic as below and last toggle the flag to display the submitted information.
-```
+```javascript
     onSubmit(){
         console.log(this.model.email);
         console.log(this.model.password);
@@ -227,13 +227,14 @@ model = new RegistrationUser('','','','','','',null,'','SG','');
         this.result = JSON.stringify(this.model);
         this.isSubmitted = true;
     }
-
+```
+```html
     <div class="row" *ngIf="isSubmitted">
         {{result}}
     </div>
 ```
  * Added an empty onChange function to handle the on change event for the nationalities drop down
-```
+```javascript
     onChange(event){
 
     }

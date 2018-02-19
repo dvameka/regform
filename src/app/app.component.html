@@ -18,7 +18,7 @@
 
                     <div class="form-group">
                         <div>
-                                <label for="password">Password</label>
+                            <label for="password">Password</label>
                         </div>
                         <input id="password" #password="ngModel" name="password" type="password" [(ngModel)]="model.password" placeholder="something secret" class="form-control"/>           
                     </div>
@@ -56,7 +56,7 @@
                         <label for="dob">Date of Birth</label>
                         <input id="dob" name="dob" type="date" #dateOfBirth="ngModel" class="form-control" [(ngModel)]="model.dateOfBirth"  value="{{ model.dateOfBirth}}"/>
                     </div>
-
+                    
                     <div class="form-group">
                             <label for="address">Address</label>
                             <textarea rows="4" cols="50" id="address" name="address" #address="ngModel" class="form-control" [(ngModel)]="model.address">
