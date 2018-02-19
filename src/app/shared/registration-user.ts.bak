@@ -3,13 +3,12 @@ export class RegistrationUser {
         public email: string,
         public password: string,
         public confirmPassword: string,
-        public firstName: string,
-        public lastName: string,
+        public fullName: string,
         public gender: string,
         public dateOfBirth: Date,
         public address: string,
         public nationality: string,
-        public contactNumber: string
+        public contactNumber: number
     ){
 
     }

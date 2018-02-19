@@ -1,1 +1,95 @@
-<button type="button" class="btn btn-primary">Primary</button>
+<div class="container fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
+                <h1>User Registration</h1>
+            </div>
+        </div>
+    
+        <div class="row" *ngIf="!isSubmitted">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
+                <form #regForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+                    <div class="form-group">
+                        <div>
+                            <label for="email">Email Address </label>
+                        </div>
+                        
+                        <input id="email" #email="ngModel" name="email" type="text" [(ngModel)]="model.email" placeholder="you@domain.com" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                                <label for="password">Password</label>
+                        </div>
+                        <input id="password" #password="ngModel" name="password" type="password" [(ngModel)]="model.password" placeholder="something secret" class="form-control"/>           
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label for="confirmpassword">Confirm Password</label>
+                        </div>
+                        <input id="confirmpassword" #confirmpassword="ngModel" name="confirmpassword" [(ngModel)]="model.confirmPassword" type="password" placeholder="something secret"  class="form-control"/>
+                                
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label for="firstName">First Name </label>
+                        </div>
+                        <input id="firstName" #firstName="ngModel" name="firstName" type="text" [(ngModel)]="model.firstName" placeholder="Emily" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label for="lastName">Last Name </label>
+                        </div>
+                        <input id="lastName" #lastName="ngModel" name="lastName" type="text" [(ngModel)]="model.lastName" placeholder="Tan" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <br/>
+                        <input name="gender" type="radio" [(ngModel)]="model.gender" value="{{gender[0]}}"/> Male
+                        <br/>
+                        <input name="gender" type="radio" [(ngModel)]="model.gender" value="{{gender[1]}}" /> Female
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input id="dob" name="dob" type="date" #dateOfBirth="ngModel" class="form-control" [(ngModel)]="model.dateOfBirth"  value="{{ model.dateOfBirth}}"/>
+                    </div>
+
+                    <div class="form-group">
+                            <label for="address">Address</label>
+                            <textarea rows="4" cols="50" id="address" name="address" #address="ngModel" class="form-control" [(ngModel)]="model.address">
+                            </textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nationality">Nationality</label>
+                        <select class="form-control" #nationality="ngModel" id="nationality" [(ngModel)]="model.nationality" [ngModelOptions]="{standalone: true}" (ngModelChange)="onChange($event)">
+                            <option *ngFor="let nationality of nationalities" [ngValue]="nationality.value">{{nationality.desc}}</option>
+                        </select>
+                        
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactNumber">Contact Number</label>
+                        <input id="contactNumber"  #contactNumber="ngModel" name="contactNumber" type="text" class="form-control"  [(ngModel)]="model.contactNumber"/>
+                        
+                    </div>
+
+                    <div class="form-group">
+                        <hr/>
+                        <button type="submit" [disabled]="!regForm.form.valid" class="btn btn-success">Submit</button>
+                        <button type="reset" class="btn btn-danger" (click)="regForm.reset()">Reset</button>
+                    </div>
+                </form>
+    
+            </div>
+        </div>
+        
+
+        <div class="row" *ngIf="isSubmitted">
+            {{result}}
+        </div>
+        
+    </div>
