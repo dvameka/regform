@@ -71,4 +71,170 @@ export class RegistrationUser {
 
 ```
 import { FormsModule } from '@angular/forms';
+
+imports: [
+    BrowserModule,
+    FormsModule
+  ],
 ```
+* under the app.component.ts define the initialization declaration for the  user registration model. Third last argument we need to default the nationalities list to SG and the fourth field is a date field therefore we have to init the value to null.
+
+```
+model = new RegistrationUser('','','','','','',null,'SG','','');
+```
+
+* On the app.component.html we start defining all the form fields with bootstrap styling.
+  * when define the form tag we need to declare the template variable #regForm
+  * Associate the webform submission with a onSubmit function declare on the app.component.ts .
+  * Disable the internal browser validation by tagging novalidate
+  * when the form initially render which is yet to be submitted. the boolean flag is defaulted to false.
+  * Bind email field with the model object email attribute and define the email variable against the form template variable. 
+  * Bind password field with the model object password attribute and define the password variable against form the template variable. 
+  * Bind confirm password field with the model object confirm password attribute and define the confirm password variable against form the template variable.
+  * Bind first name field with the model object first name attribute and define the first name variable against form the template variable. 
+  * Bind last name field with the model object last name attribute and define the last name variable against form the template variable. 
+  * Bind gender field with the model object gender attribute and define the gender variable against form the template variable. The radio button values of the gender field is derived from the array declare in the app.component.ts .
+  ```
+    gender: string[] = ['M', 'F'];
+  ```
+  * Bind the rest of the fields. Except the nationalities is derived from an array which is declare under the app.component.ts
+  ```
+    nationalities = [ {desc:'Singapore', value:'SG'}, 
+                    {desc: 'Malaysia', value:'MY'}, 
+                    {desc:'Thailand', value:'TH'},  
+                    {desc:'Vietnam', value: 'VN'}];
+  ``` 
+  
+```
+<div class="container fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
+                <h1>User Registration</h1>
+            </div>
+        </div>
+    
+        <div class="row" *ngIf="!isSubmitted">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
+                <form #regForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+                    <div class="form-group">
+                        <div>
+                            <label for="email">Email Address </label>
+                        </div>
+                        
+                        <input id="email" #email="ngModel" name="email" type="text" [(ngModel)]="model.email" placeholder="you@domain.com" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                                <label for="password">Password</label>
+                        </div>
+                        <input id="password" #password="ngModel" name="password" type="password" [(ngModel)]="model.password" placeholder="something secret" class="form-control"/>           
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label for="confirmpassword">Confirm Password</label>
+                        </div>
+                        <input id="confirmpassword" #confirmpassword="ngModel" name="confirmpassword" [(ngModel)]="model.confirmPassword" type="password" placeholder="something secret"  class="form-control"/>
+                                
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label for="firstName">First Name </label>
+                        </div>
+                        <input id="firstName" #firstName="ngModel" name="firstName" type="text" [(ngModel)]="model.firstName" placeholder="Emily" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label for="lastName">Last Name </label>
+                        </div>
+                        <input id="lastName" #lastName="ngModel" name="lastName" type="text" [(ngModel)]="model.lastName" placeholder="Tan" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <br/>
+                        <input name="gender" type="radio" [(ngModel)]="model.gender" value="{{gender[0]}}"/> Male
+                        <br/>
+                        <input name="gender" type="radio" [(ngModel)]="model.gender" value="{{gender[1]}}" /> Female
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input id="dob" name="dob" type="date" #dateOfBirth="ngModel" class="form-control" [(ngModel)]="model.dateOfBirth"  value="{{ model.dateOfBirth}}"/>
+                    </div>
+
+                    <div class="form-group">
+                            <label for="address">Address</label>
+                            <textarea rows="4" cols="50" id="address" name="address" #address="ngModel" class="form-control" [(ngModel)]="model.address">
+                            </textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nationality">Nationality</label>
+                        <select class="form-control" #nationality="ngModel" id="nationality" [(ngModel)]="model.nationality" [ngModelOptions]="{standalone: true}" (ngModelChange)="onChange($event)">
+                            <option *ngFor="let nationality of nationalities" [ngValue]="nationality.value">{{nationality.desc}}</option>
+                        </select>
+                        
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactNumber">Contact Number</label>
+                        <input id="contactNumber"  #contactNumber="ngModel" name="contactNumber" type="text" class="form-control"  [(ngModel)]="model.contactNumber"/>
+                        
+                    </div>
+
+                    <div class="form-group">
+                        <hr/>
+                        <button type="submit" [disabled]="!regForm.form.valid" class="btn btn-success">Submit</button>
+                        <button type="reset" class="btn btn-danger" (click)="regForm.reset()">Reset</button>
+                    </div>
+                </form>
+    
+            </div>
+        </div>
+        
+
+        <div class="row" *ngIf="isSubmitted">
+            {{result}}
+        </div>
+        
+    </div>
+```
+
+* Add a submit button and reset button at the bottom of the contact number field. Implement event trigger on the reset button by invoking a built in reset function, automaitically angular will reset all fields which is binded to the declared scope. 
+```
+ <div class="form-group">
+    <hr/>
+    <button type="submit" [disabled]="!regForm.form.valid" class="btn btn-success">Submit</button>
+    <button type="reset" class="btn btn-danger" (click)="regForm.reset()">Reset</button>
+</div>
+
+* Under the app.component.ts onSubmit implemented capturing logic as below and last toggle the flag to display the submitted information.
+```
+    onSubmit(){
+        console.log(this.model.email);
+        console.log(this.model.password);
+        console.log(this.model.confirmPassword);
+        console.log(this.model.firstName);
+        console.log(this.model.lastName);
+        console.log(this.model.gender);
+        console.log(this.model.dateOfBirth);
+        console.log(this.model.address);
+        console.log(this.model.nationality);
+        console.log(this.model.contactNumber);
+        this.result = JSON.stringify(this.model);
+        this.isSubmitted = true;
+    }
+
+    <div class="row" *ngIf="isSubmitted">
+        {{result}}
+    </div>
+```
+ * Added an empty onChange function to handle the on change event for the nationalities drop down
+```
+    onChange(event){
+
+    }
+``` 

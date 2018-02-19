@@ -8,7 +8,7 @@ import { RegistrationUser } from './shared/registration-user'
 export class AppComponent {
   title = 'app';
   model = new RegistrationUser('','','','','','',null,'SG','','');
-  gender: string[] = ['M', 'F'];;
+  gender: string[] = ['M', 'F'];
   nationalities = [ {desc:'Singapore', value:'SG'}, 
                     {desc: 'Malaysia', value:'MY'}, 
                     {desc:'Thailand', value:'TH'},  
@@ -31,5 +31,9 @@ export class AppComponent {
     this.result = JSON.stringify(this.model);
     this.isSubmitted = true;
     
+  }
+
+  onChange(event){
+
   }
 }
