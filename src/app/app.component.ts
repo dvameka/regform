@@ -7,7 +7,7 @@ import { RegistrationUser } from './shared/registration-user'
 })
 export class AppComponent {
   title = 'app';
-  model = new RegistrationUser('','','','','','',null,'SG','','');
+  model = new RegistrationUser('','','','','','',null,'','SG','');
   gender: string[] = ['M', 'F'];
   nationalities = [ {desc:'Singapore', value:'SG'}, 
                     {desc: 'Malaysia', value:'MY'}, 
