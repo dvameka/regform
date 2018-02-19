@@ -203,7 +203,7 @@ model = new RegistrationUser('','','','','','',null,'SG','','');
     </div>
 ```
 
-* Add a submit button and reset button at the bottom of the contact number field. Implement event trigger on the reset button by invoking a built in reset function, automaitically angular will reset all fields which is binded to the declared scope. 
+* Add a submit button and reset button at the bottom of the contact number field. Implement event trigger on the reset button by invoking a built in reset function, angular framework automaitically will reset all binded fields. 
 ```
  <div class="form-group">
     <hr/>
