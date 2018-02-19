@@ -1,1 +1,44 @@
-<button type="button" class="btn btn-primary">Primary</button>
+<div class="container fluid">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
+            <h1>User Registration</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
+            <div>
+                <label>My name</label>
+            </div>
+            <input type="text" (keyup)="keyPressUp($event)" (keypress)="keyPress($event)" name="myname" [(ngModel)]="myname"/>
+            <p>{{valuebeingTypedOnText}} - {{myname}}</p>
+            <p>Hi {{myname}} , how are you ?</p>
+            <a href="#" (click)="sayGreetings()">{{myname}}</a>
+            <p>{{greetings}}</p>
+
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
+                <div>
+                    <label>Age</label>
+                </div>
+                <input type="text" (keyup)="checkAge($event)" name="age" [(ngModel)]="age"/>
+            </div>
+    </div>
+
+    <div class="row">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
+                <div>
+                    <label>{{aboveAge}}</label>
+                </div>
+            </div>
+    </div>
+    <div class="row">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
+                <button (click)="onClickMe()" type="button" class="btn btn-warning">hello I am a button !</button>
+            </div>
+    </div>        
+    
+    
+</div>

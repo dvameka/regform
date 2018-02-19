@@ -8,7 +8,7 @@ export class RegistrationUser {
         public dateOfBirth: Date,
         public address: string,
         public nationality: string,
-        public contactNumber: number
+        public contactNumber: string
     ){
 
     }
