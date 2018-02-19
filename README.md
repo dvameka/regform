@@ -80,7 +80,7 @@ imports: [
 * under the app.component.ts define the initialization declaration for the  user registration model. Third last argument we need to default the nationalities list to SG and the fourth field is a date field therefore we have to init the value to null.
 
 ```
-model = new RegistrationUser('','','','','','',null,'SG','','');
+model = new RegistrationUser('','','','','','',null,'','SG','');
 ```
 
 * On the app.component.html we start defining all the form fields with bootstrap styling.
