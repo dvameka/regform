@@ -210,7 +210,7 @@ model = new RegistrationUser('','','','','','',null,'SG','','');
     <button type="submit" [disabled]="!regForm.form.valid" class="btn btn-success">Submit</button>
     <button type="reset" class="btn btn-danger" (click)="regForm.reset()">Reset</button>
 </div>
-
+```
 * Under the app.component.ts onSubmit implemented capturing logic as below and last toggle the flag to display the submitted information.
 ```
     onSubmit(){
@@ -233,6 +233,7 @@ model = new RegistrationUser('','','','','','',null,'SG','','');
     </div>
 ```
  * Added an empty onChange function to handle the on change event for the nationalities drop down
+
 ```
     onChange(event){
 
