@@ -203,7 +203,7 @@ model = new RegistrationUser('','','','','','',null,'SG','','');
     </div>
 ```
 
-* Add a submit button and reset button at the bottom of the contact number field. Implement event trigger on the reset button by invoking a built in reset function, angular framework automaitically will reset all binded fields. 
+* Add a submit button and reset button at the bottom of the contact number field. Implement event trigger on the reset button by invoking a built in reset function, angular framework automaitically will reset all binded fields.
 ```
  <div class="form-group">
     <hr/>
@@ -233,7 +233,6 @@ model = new RegistrationUser('','','','','','',null,'SG','','');
     </div>
 ```
  * Added an empty onChange function to handle the on change event for the nationalities drop down
-
 ```
     onChange(event){
 
