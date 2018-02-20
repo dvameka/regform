@@ -13,7 +13,7 @@
                             <label for="email">Email Address</label>
                         </div>
                         
-                        <input id="email" #email="ngModel" name="email" type="text" [(ngModel)]="model.email" placeholder="you@domain.com" class="form-control" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required/> 
+                        <input id="email" #email="ngModel" name="email" type="text" [(ngModel)]="model.email" placeholder="you@domain.com" class="form-control" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required/>
                         <div *ngIf="email.errors && (email.touched || isSubmitted)">
                             <div [hidden]="!email.errors.required && email.dirty" class="help-block alert alert-danger">
                                 Email is required.
@@ -28,7 +28,7 @@
 
                     <div class="form-group">
                         <div>
-                            <label for="password">Password {{password.errors.required}}</label>
+                            <label for="password">Password</label>
                         </div>
                         <input id="password" #password="ngModel" name="password" type="password" [(ngModel)]="model.password" placeholder="something secret" class="form-control" pattern="^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$" required/>         
                         <div *ngIf="password.errors && (password.touched || isSubmitted)">
