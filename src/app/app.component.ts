@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegistrationUser } from './shared/registration-user'
+import {FormControl, Validators} from '@angular/forms';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,7 +16,7 @@ export class AppComponent implements OnInit{
                     {desc: 'Malaysia', value:'MY'}, 
                     {desc:'Thailand', value:'TH'},  
                     {desc:'Vietnam', value: 'VN'}];
-                    
+
   isSubmitted: boolean = false;
   result: string = "";
   
@@ -22,6 +24,14 @@ export class AppComponent implements OnInit{
     this.model = new RegistrationUser('','','','','','',null,'','MY','');
   }
   
+  email = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required]);
+  
+  getErrorMessage() {
+    return this.email.hasError('required') ? 'You must enter a value' :
+        this.email.hasError('email') ? 'Not a valid email' : '';
+  }
+
   // this is to handle when I click on a submit or save button.
   onSubmit(){
     console.log(this.model.email);

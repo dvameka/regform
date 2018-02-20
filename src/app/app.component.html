@@ -9,37 +9,21 @@
             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
                 <form #regForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
                     <div class="form-group">
-                        <div>
-                            <label for="email">Email Address</label>
-                        </div>
-                        
-                        <input id="email" #email="ngModel" name="email" type="text" [(ngModel)]="model.email" placeholder="you@domain.com" class="form-control" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required/> 
-                        <div *ngIf="email.errors && (email.touched || isSubmitted)">
-                            <div [hidden]="!email.errors.required && email.dirty" class="help-block alert alert-danger">
-                                Email is required.
-                            </div>
-                            <div [hidden]="!email.errors.pattern" class="help-block alert alert-danger">
-                                <span class="help-block alert">
-                                Email is invalid.
-                                </span>
-                            </div>
+                        <div class="example-container">
+                            <mat-form-field>
+                                <input matInput placeholder="Enter your email" [formControl]="email" required>
+                                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <div>
-                            <label for="password">Password {{password.errors.required}}</label>
+                        <div class="example-container">
+                            <mat-form-field>
+                                <input matInput placeholder="Enter your password" [formControl]="password" required>
+                                <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
                         </div>
-                        <input id="password" #password="ngModel" name="password" type="password" [(ngModel)]="model.password" placeholder="something secret" class="form-control" pattern="^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$" required/>         
-                        <div *ngIf="password.errors && (password.touched || isSubmitted)">
-                                <div [hidden]="!password.errors.required && password.dirty" class="help-block alert alert-danger">
-                                    Password is required.
-                                </div>
-                                <div [hidden]="!password.errors.pattern" class="help-block alert alert-danger">
-                                    <span class="help-block alert">Password must include special characters (!@#$%^&*). Alphanumeric and both uppercase & lowercase.
-                                    </span>
-                                </div>
-                            </div> 
                     </div>
                     <div class="form-group">
                         <div>
