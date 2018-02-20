@@ -1,1 +1,187 @@
-<button type="button" class="btn btn-primary">Primary</button>
+<div class="container fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
+                <h1>User Registration</h1>
+            </div>
+        </div>
+    
+        <div class="row" *ngIf="!isSubmitted">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
+                <form #regForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+                    <div class="form-group">
+                        <div>
+                            <label for="email">Email Address</label>
+                        </div>
+                        
+                        <input id="email" #email="ngModel" name="email" type="text" [(ngModel)]="model.email" placeholder="you@domain.com" class="form-control" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required/> 
+                        <div *ngIf="email.errors && (email.touched || isSubmitted)">
+                            <div [hidden]="!email.errors.required && email.dirty" class="help-block alert alert-danger">
+                                Email is required.
+                            </div>
+                            <div [hidden]="!email.errors.pattern" class="help-block alert alert-danger">
+                                <span class="help-block alert">
+                                Email is invalid.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label for="password">Password {{password.errors.required}}</label>
+                        </div>
+                        <input id="password" #password="ngModel" name="password" type="password" [(ngModel)]="model.password" placeholder="something secret" class="form-control" pattern="^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$" required/>         
+                        <div *ngIf="password.errors && (password.touched || isSubmitted)">
+                                <div [hidden]="!password.errors.required && password.dirty" class="help-block alert alert-danger">
+                                    Password is required.
+                                </div>
+                                <div [hidden]="!password.errors.pattern" class="help-block alert alert-danger">
+                                    <span class="help-block alert">Password must include special characters (!@#$%^&*). Alphanumeric and both uppercase & lowercase.
+                                    </span>
+                                </div>
+                            </div> 
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label for="confirmpassword">Confirm Password</label>
+                        </div>
+                        <input id="confirmpassword" #confirmpassword="ngModel" name="confirmpassword" [(ngModel)]="model.confirmPassword" type="password" placeholder="something secret"  class="form-control" required [required]="model.password"/>
+                        <div *ngIf="confirmpassword.errors && (confirmpassword.touched || isSubmitted)">
+                                <div [hidden]="!confirmpassword.errors.required && confirmpassword.dirty" class="help-block alert alert-danger">
+                                    Confirm Password is required.
+                                </div>
+                        </div>
+                        <div *ngIf="confirmpassword.dirty" [hidden]="!(model.confirmPassword != model.password)" class="help-block alert alert-danger">
+                                <span class="help-block alert alert-danger">
+                                    Password do not match.
+                                </span>
+
+                        </div>      
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label for="firstName">First Name </label>
+                        </div>
+                        <input id="firstName" #firstName="ngModel" name="firstName" type="text" [(ngModel)]="model.firstName" placeholder="Emily" class="form-control" required/>
+                        <div *ngIf="firstName.errors && (firstName.touched || isSubmitted)">
+                                <div [hidden]="!firstName.errors.required && firstName.dirty" class="help-block alert alert-danger">
+                                    First Name is required.
+                                </div>
+                        </div> 
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label for="lastName">Last Name </label>
+                        </div>
+                        <input id="lastName" #lastName="ngModel" name="lastName" type="text" [(ngModel)]="model.lastName" placeholder="Tan" class="form-control" required/>
+                        <div *ngIf="lastName.errors && (lastName.touched || isSubmitted)">
+                                <div [hidden]="!lastName.errors.required && lastName.dirty" class="help-block alert alert-danger">
+                                    Last Name is required.
+                                </div>
+                        </div> 
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <br/>
+                        <input name="gender" type="radio" [(ngModel)]="model.gender" value="{{gender[0]}}"/> Male
+                        <br/>
+                        <input name="gender" type="radio" [(ngModel)]="model.gender" value="{{gender[1]}}" /> Female
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input id="dob" name="dob" type="date" #dateOfBirth="ngModel" class="form-control" [(ngModel)]="model.dateOfBirth"  value="{{ model.dateOfBirth}}" required/>
+                        <div *ngIf="dateOfBirth.errors && (dateOfBirth.touched || isSubmitted)">
+                                <div [hidden]="!dateOfBirth.errors.required && dateOfBirth.dirty" class="help-block alert alert-danger">
+                                    Date of Birth is required.
+                                </div>
+                        </div>  
+                    </div>
+                    
+                    <div class="form-group">
+                            <label for="address">Address</label>
+                            <textarea rows="4" cols="50" id="address" name="address" #address="ngModel" class="form-control" [(ngModel)]="model.address" required>
+                            </textarea>
+                            <div *ngIf="address.errors && (address.touched || isSubmitted)">
+                                    <div [hidden]="!address.errors.required && address.dirty" class="help-block alert alert-danger">
+                                        Address is required.
+                                    </div>
+                            </div>  
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nationality">Nationality</label>
+                        <select class="form-control" #nationality="ngModel" id="nationality" [(ngModel)]="model.nationality" [ngModelOptions]="{standalone: true}" (ngModelChange)="onChange($event)" required>
+                            <option *ngFor="let nationality of nationalities" [ngValue]="nationality.value">{{nationality.desc}}</option>
+                        </select>
+                        <p *ngIf="nationalities.length > 3">{{ ' There are more than 3 countries in the list !' | uppercase }}</p>
+                        <div *ngIf="nationality.errors && (nationality.touched || isSubmitted)">
+                                <div [hidden]="!nationality.errors.required && nationality.dirty" class="help-block alert alert-danger">
+                                    Nationality is required.
+                                </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactNumber">Contact Number</label>
+                        <input id="contactNumber"  #contactNumber="ngModel" name="contactNumber" type="text" class="form-control"  [(ngModel)]="model.contactNumber" minlength="8" maxlength="8" pattern="[0-9]*" required/>
+                        <div *ngIf="contactNumber.errors && (contactNumber.touched || isSubmitted)">
+                                <div [hidden]="!contactNumber.errors.required && contactNumber.dirty" class="help-block alert alert-danger">
+                                    Contact Number is required.
+                                </div>
+                                <div [hidden]="!contactNumber.errors.pattern" class="help-block alert alert-danger">
+                                    <span class="help-block alert">Contact No. is invalid
+                                    </span>
+                                </div>
+                                <div [hidden]="!contactNumber.errors.minlength" class="help-block alert alert-danger">
+                                    <span class="help-block alert">Contact No. must be at least 8 digit long.
+                                    </span>
+                                </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="form-group">
+                        <hr/>
+                        <button type="submit" [disabled]="!regForm.form.valid" class="btn btn-success">Submit</button>
+                        <button type="reset" class="btn btn-danger" (click)="regForm.reset()">Reset</button>
+                    </div>
+                </form>
+    
+            </div>
+        </div>
+        
+        <div class="row" *ngIf="isSubmitted">
+            <div class="col-6" [ngStyle]="{'background-color':'grey'}">
+                    <div class="form-group">
+                            <label >{{model.email}}</label> 
+                    </div>
+                    <div class="form-group">
+                            <label >{{model.firstName}}</label> 
+                    </div>
+                    <div class="form-group">
+                            <label >{{model.lastName}}</label> 
+                    </div>
+                    <div class="form-group">
+                            <label >{{model.gender}}</label> 
+                    </div>
+                    <div class="form-group">
+                            <label >{{model.address}}</label> 
+                    </div>    
+                    <div class="form-group">
+                            <label >{{model.dateOfBirth}}</label> 
+                    </div>
+                    <div class="form-group">
+                            <label >{{model.nationality}}</label> 
+                    </div>
+                    <div class="form-group">
+                            <label >{{model.contactNumber}}</label> 
+                    </div>
+            </div>
+        </div>
+        
+    </div>
