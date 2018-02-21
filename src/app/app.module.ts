@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { UserRegistrationService } from './services/user-registration.service';
 
 @NgModule({
   declarations: [
@@ -11,9 +12,12 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    UserRegistrationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

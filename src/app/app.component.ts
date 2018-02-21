@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RegistrationUser } from './shared/registration-user'
+import { RegistrationUser } from './shared/registration-user';
+import { UserRegistrationService } from './services/user-registration.service'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,8 +19,12 @@ export class AppComponent implements OnInit{
   isSubmitted: boolean = false;
   result: string = "";
   
+  constructor(private userService: UserRegistrationService){
+
+  }
+
   ngOnInit() {
-    this.model = new RegistrationUser('','','','','','',null,'','MY','');
+    this.model = new RegistrationUser('','','','','','',null,'','MY','', 0);
   }
   
   // this is to handle when I click on a submit or save button.
@@ -34,6 +39,12 @@ export class AppComponent implements OnInit{
     console.log(this.model.address);
     console.log(this.model.nationality);
     console.log(this.model.contactNumber);
+    this.userService.saveUserRegistration(this.model)
+      .subscribe(user => {
+        console.log('send to backend !');
+        console.log(user);
+        this.model = user;
+      })
     this.isSubmitted = true;
   }
 

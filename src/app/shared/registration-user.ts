@@ -9,7 +9,8 @@ export class RegistrationUser {
         public dateOfBirth: Date,
         public address: string,
         public nationality: string,
-        public contactNumber: string
+        public contactNumber: string,
+        public age: Number
     ){
 
     }
