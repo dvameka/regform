@@ -224,13 +224,40 @@ model = new RegistrationUser('','','','','','',null,'','SG','');
         console.log(this.model.address);
         console.log(this.model.nationality);
         console.log(this.model.contactNumber);
-        this.result = JSON.stringify(this.model);
         this.isSubmitted = true;
     }
 ```
 ```html
     <div class="row" *ngIf="isSubmitted">
-        {{result}}
+        <div class="col-6" [ngStyle]="{'background-color':'grey'}">
+                <div class="form-group">
+                        <label >{{model.email}}</label> 
+                </div>
+                <div class="form-group">
+                        <label >{{model.firstName}}</label> 
+                </div>
+                <div class="form-group">
+                        <label >{{model.lastName}}</label> 
+                </div>
+                <div class="form-group">
+                        <label >{{model.gender}}</label> 
+                </div>
+                <div class="form-group">
+                        <label >{{model.address}}</label> 
+                </div>    
+                <div class="form-group">
+                        <label >{{model.dateOfBirth}}</label> 
+                </div>
+                <div class="form-group">
+                        <label >{{model.nationality}}</label> 
+                </div>
+                <div class="form-group">
+                        <label >{{model.contactNumber}}</label> 
+                </div>
+                <div class="form-group">
+                    <label >Age = {{model.age}}</label> 
+            </div>
+        </div>
     </div>
 ```
  * Add an empty onChange function to handle the on change event for the nationalities drop down
@@ -239,3 +266,53 @@ model = new RegistrationUser('','','','','','',null,'','SG','');
 
     }
 ``` 
+* Create a directory and app.js file under the project directory using visual studio code (server/app.js)
+* Create server side app (Node JS + ExpressJS), import in express JS, CORS and body-parser
+```javascript
+/**
+ * Server side app
+ */
+
+ console.log("Starting server side app ...");
+ /* start : import libs */
+ const express = require('express');
+ var cors = require('cors')
+ const bodyParser = require('body-parser');
+/* end : import libs */
+```
+* Instantiate andn configure ExpressJS for the backend server side app. The NODE_PORT variable is derived from the operating system environment variable
+```javascript
+var app = express();
+ app.use(bodyParser.urlencoded({ extended: false}));
+ app.use(bodyParser.json());
+ app.use(cors());
+ console.log(__dirname);
+ const NODE_PORT = process.env.PORT;
+
+ app.use(express.static(__dirname + "/../dist/"));
+
+```
+* Create an endpoint on the backend server side app
+```javascript
+app.post("/api/user/register", (req, res)=>{
+    console.log(req);
+    var user = req.body;
+    console.log(user);
+    user.age = 40;
+    res.status(200).json(user);
+ });
+```
+* Incorporate Express JS listening codes into the app.js
+```javascript
+app.listen(NODE_PORT, function(){
+     console.log(`Backend Server started at ${NODE_PORT}`);
+ })
+```
+* Run the server side app on your command prompt/terminal
+```
+# mac and linux
+$ export PORT=4000
+# windows 
+$ set PORT=4000
+$ nodemon server/app.js
+```
