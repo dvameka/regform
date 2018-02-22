@@ -1,3 +1,44 @@
 [
-    
+    {
+        "email": "bunnyppl@hotmail.com",
+        "password": "Password@123",
+        "confirmPassword": "Password@123",
+        "firstName": "Ken",
+        "lastName": "P",
+        "gender": "M",
+        "dateOfBirth": "2018-02-22",
+        "address": "sfdfdsf",
+        "nationality": "MY",
+        "contactNumber": "23433243",
+        "age": 40,
+        "sgidNo": ""
+    },
+    {
+        "email": "bunnyppl@hotmail.com",
+        "password": "Password@123",
+        "confirmPassword": "Password@123",
+        "firstName": "Ken",
+        "lastName": "P",
+        "gender": "M",
+        "dateOfBirth": "2018-02-22",
+        "address": "sfdfdsf",
+        "nationality": "MY",
+        "contactNumber": "23433243",
+        "age": 40,
+        "sgidNo": ""
+    },
+    {
+        "email": "bunnyppl@gmail.com",
+        "password": "Password@123",
+        "confirmPassword": "Password@123",
+        "firstName": "Ken",
+        "lastName": "P",
+        "gender": "M",
+        "dateOfBirth": "2018-02-22",
+        "address": "sfdfdsf",
+        "nationality": "MY",
+        "contactNumber": "23433243",
+        "age": 40,
+        "sgidNo": ""
+    }
 ]

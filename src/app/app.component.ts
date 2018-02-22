@@ -30,10 +30,11 @@ export class AppComponent implements OnInit{
   // when the page load
   ngOnInit() {
     this.model = new RegistrationUser('','','','','','',null,'','MY','', 0, '');
+    /*
     this.userService.getAllReviews()
       .subscribe(result => {
         this.reviews = result;
-      });
+      });*/
  
   }
   

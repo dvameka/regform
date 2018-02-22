@@ -44,7 +44,7 @@
   ]*/
 
   var jsonData;
-
+  console.log(__dirname + '/data.json');
   fs.readFile(__dirname + '/data.json', 'UTF-8', function(err, data){
       if(err){
           throw err;
@@ -56,14 +56,22 @@
  // put 
  // delete
  app.post("/api/user/register", (req, res)=>{
-    console.log(req);
+    //console.log(req);
     var user = req.body;
     console.log(user);
     user.age = 40;
     jsonData.push(user);
-    res.status(200).json(jsonData);
+    fs.writeFile(__dirname + '/data.json', JSON.stringify(jsonData), 'utf8', function(data){
+        console.log(data);
+        res.status(200).json(jsonData);
+    });
  });
 
+ function callback(result){
+    console.log(result);
+ }
+
+ /*
  app.get("/api/product/reviews", (req, res)=>{
     res.status(200).json(reviews);
  });
@@ -71,7 +79,7 @@
  app.get("/api/product/list", (req, res)=>{
     console.log(products);
     res.status(200).json(products);
- });
+ });*/
 
 
  app.listen(NODE_PORT, function(){
