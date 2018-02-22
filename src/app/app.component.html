@@ -170,25 +170,9 @@
                 </form>
 
 
-                <div class="row">
-                    <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
-                        <h1>Reviews</h1>
-                    </div>
-                </div> 
-                <hr/>  
-                <div *ngFor="let review of reviews">
-                   
-                    <div>
-                        Rating : {{review.rating}}
-                    </div>
-                    <div>
-                        by {{review.by}}
-                    </div>
-                    <div>
-                        Review :  {{review.comment}}
-                    </div>
-                    <br>
-                </div>
+                
+                <app-product-review [reviewsProduct] = "reviews">
+                </app-product-review>
     
             </div>
         </div>

@@ -12,10 +12,10 @@ export class AppComponent implements OnInit{
   model = null;
   gender: string[] = ['M', 'F'];
   
-  nationalities = [ {desc:'Singapore', value:'SG'}, 
-                    {desc: 'Malaysia', value:'MY'}, 
-                    {desc:'Thailand', value:'TH'},  
-                    {desc:'Vietnam', value: 'VN'}];
+  nationalities = [ {desc:'Singaporean', value:'SG'}, 
+                    {desc: 'Malaysian', value:'MY'}, 
+                    {desc:'Thai', value:'TH'},  
+                    {desc:'Vietnamese', value: 'VN'}];
                     
   isSubmitted: boolean = false;
   showSingaporeCitizenId = false;
@@ -62,6 +62,8 @@ export class AppComponent implements OnInit{
     console.log(event);
     if(event === this.nationalities[0].value){
       this.showSingaporeCitizenId = true;
+    }else{
+      this.showSingaporeCitizenId = false;
     }
   }
 }

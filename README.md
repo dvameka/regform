@@ -265,7 +265,7 @@ model = new RegistrationUser('','','','','','',null,'','SG','');
     onChange(event){
         console.log(event);
         if(event === this.nationalities[0].value){
-        this.showSingaporeCitizenId = true;
+            this.showSingaporeCitizenId = true;
         }
     }
 ```
