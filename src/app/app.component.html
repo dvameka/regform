@@ -126,6 +126,23 @@
                         
                     </div>
 
+                    <div *ngIf="showSingaporeCitizenId" class="form-group">
+                        <label for="SGidNo">Singapore ID No.</label>
+                        
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">S</span>
+                            </div>
+                            <input id="SGidNo" name="SGidNo" type="text" #sgidNo="ngModel" class="form-control" [(ngModel)]="model.sgidNo"  value="{{ model.sgidNo}}" required/>
+                        </div>
+                        
+                        <div *ngIf="sgidNo.errors && (sgidNo.touched || isSubmitted)">
+                                <div [hidden]="!sgidNo.errors.required && sgidNo.dirty" class="help-block alert alert-danger">
+                                    ID No. is required.
+                                </div>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="contactNumber">Contact Number</label>
                         <input id="contactNumber"  #contactNumber="ngModel" name="contactNumber" type="text" class="form-control"  [(ngModel)]="model.contactNumber" minlength="8" maxlength="8" pattern="[0-9]*" required/>
@@ -151,6 +168,11 @@
                         <button type="reset" class="btn btn-danger" (click)="regForm.reset()">Reset</button>
                     </div>
                 </form>
+
+
+                
+                <app-product-review [reviewsProduct] = "reviews">
+                </app-product-review>
     
             </div>
         </div>
@@ -181,6 +203,9 @@
                     <div class="form-group">
                             <label >{{model.contactNumber}}</label> 
                     </div>
+                    <div class="form-group">
+                        <label >Age = {{model.age}}</label> 
+                </div>
             </div>
         </div>
         

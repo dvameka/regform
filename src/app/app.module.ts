@@ -3,17 +3,25 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { UserRegistrationService } from './services/user-registration.service';
+import { SecurityModule } from './modules/security/security.module';
+import { ProductReviewComponent } from './product-review/product-review.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProductReviewComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    SecurityModule
   ],
-  providers: [],
+  providers: [
+    UserRegistrationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
