@@ -372,10 +372,58 @@ public getAllReviews(){
 ```javascript
 reviews: any;
 ```
-* Add an initialization codes under the ngOnInit function
+* Add an initialization get product reviews codes under the ngOnInit function
 ```javascript
 this.userService.getAllReviews()
       .subscribe(result => {
         this.reviews = result;
       })
+```
+* On the app.component.htmll page after the submit button add the following selector. The reviews array is pass into the product review component by assigning the app.component.ts class variable to the @Input annotation of the child component.
+```javascript
+<app-product-review [reviewsProduct] = "reviews">
+                </app-product-review>
+```
+* Generate the product review component
+```
+ng g component product-review 
+```
+* Edit the product review component ts declare the @Input annonation for the product review arrays that derived from the parent component
+```javascript
+import { Component, Input, OnInit } from '@angular/core';
+import { ProductReview } from '../shared/product-review';
+@Component({
+  selector: 'app-product-review',
+  templateUrl: './product-review.component.html',
+  styleUrls: ['./product-review.component.css']
+})
+export class ProductReviewComponent implements OnInit {
+  @Input() reviewsProduct: ProductReview[];
+  title :string = "Reviews"
+  constructor() { }
+
+  ngOnInit() {
+  }
+}
+```
+* On the product review template loop the reviews array and render the display.
+```html
+<div class="row">
+    <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
+        <h1>{{title}}</h1>
+    </div>
+</div> 
+<hr/>  
+<div *ngFor="let review of reviewsProduct" >
+<div>
+    Rating : {{review.rating}}
+</div>
+<div>
+    by {{review.by}}
+</div>
+<div>
+    Review >>> :  {{review.comment}}
+</div>
+<br>
+</div>
 ```
