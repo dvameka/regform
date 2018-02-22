@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegistrationUser } from './shared/registration-user';
-import { UserRegistrationService } from './services/user-registration.service'
+import { UserRegistrationService } from './services/user-registration.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,13 +19,19 @@ export class AppComponent implements OnInit{
                     
   isSubmitted: boolean = false;
   result: string = "";
-  
+  reviews: any;
+
   constructor(private userService: UserRegistrationService){
 
   }
-
+  
+  // when the page load
   ngOnInit() {
     this.model = new RegistrationUser('','','','','','',null,'','MY','', 0);
+    this.userService.getAllReviews()
+      .subscribe(result => {
+        this.reviews = result;
+      })
   }
   
   // this is to handle when I click on a submit or save button.

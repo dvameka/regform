@@ -151,6 +151,20 @@
                         <button type="reset" class="btn btn-danger" (click)="regForm.reset()">Reset</button>
                     </div>
                 </form>
+
+                <div *ngFor="let review of reviews">
+                   
+                    <div>
+                        {{review.rating}}
+                    </div>
+                    <div>
+                        by {{review.by}}
+                    </div>
+                    <div>
+                        Review {{review.comment}}
+                    </div>
+                    <hr/>
+                </div>
     
             </div>
         </div>
