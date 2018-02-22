@@ -202,7 +202,6 @@ model = new RegistrationUser('','','','','','',null,'','SG','');
         
     </div>
 ```
-
 * Add a submit button and reset button at the bottom of the contact number field. Implement event trigger on the reset button by invoking a built in reset function, angular framework automaitically will reset all binded fields.
 ```html
  <div class="form-group">
@@ -269,7 +268,7 @@ model = new RegistrationUser('','','','','','',null,'','SG','');
         }
     }
 ```
-* Incorporate the dynamic ID No. field right after the nationality select options.
+* Incorporate the dynamic rendered ID No. field right after the nationality is selected as Singaporean (SG).
 ```html
  <div *ngIf="showSingaporeCitizenId" class="form-group">
     <label for="SGidNo">Singapore ID No.</label>
