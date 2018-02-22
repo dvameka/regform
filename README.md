@@ -1,4 +1,4 @@
-# Angular5 Registration form
+# Angular 5 Registration form
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.8.
 
