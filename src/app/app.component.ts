@@ -21,6 +21,7 @@ export class AppComponent implements OnInit{
   showSingaporeCitizenId = false;
   result: string = "";
   reviews: any;
+  users: any;
 
   constructor(private userService: UserRegistrationService){
 
@@ -32,7 +33,8 @@ export class AppComponent implements OnInit{
     this.userService.getAllReviews()
       .subscribe(result => {
         this.reviews = result;
-      })
+      });
+ 
   }
   
   // this is to handle when I click on a submit or save button.
@@ -48,12 +50,12 @@ export class AppComponent implements OnInit{
     console.log(this.model.nationality);
     console.log(this.model.contactNumber);
     this.userService.saveUserRegistration(this.model)
-      .subscribe(user => {
+      .subscribe(users => {
         console.log('send to backend !');
-        console.log(user);
-        this.model = user;
+        console.log(users);
+        this.users = users;
       })
-    this.isSubmitted = true;
+    //this.isSubmitted = true;
   }
 
   onChange(event){

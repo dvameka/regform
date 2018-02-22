@@ -7,6 +7,7 @@
  const express = require('express');
  var cors = require('cors')
  const bodyParser = require('body-parser');
+ const fs = require('fs');
 /* end : import libs */
  
  var app = express();
@@ -17,7 +18,7 @@
  const NODE_PORT = process.env.PORT;
 
  app.use(express.static(__dirname + "/../dist/"));
-
+/*
  var reviews  = [{
     rating : 5,
     by: 'Ricky',
@@ -40,8 +41,16 @@
       desc: "Horlicks"},
       {productid: 3,
       desc: "Nescafe"}         
-  ]
+  ]*/
 
+  var jsonData;
+
+  fs.readFile(__dirname + '/data.json', 'UTF-8', function(err, data){
+      if(err){
+          throw err;
+      }
+      jsonData = JSON.parse(data);
+  });
  // get
  // post
  // put 
@@ -51,7 +60,8 @@
     var user = req.body;
     console.log(user);
     user.age = 40;
-    res.status(200).json(user);
+    jsonData.push(user);
+    res.status(200).json(jsonData);
  });
 
  app.get("/api/product/reviews", (req, res)=>{

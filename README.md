@@ -31,7 +31,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 * ng new <app name>
 * Change directory to the app folder. <app name>
-* npm install bootstrap --save
+* npm install bootstrap express body-parser cors --save
 * Add bootstrap css and js into the .angular-cli.json
 
 ```javascript

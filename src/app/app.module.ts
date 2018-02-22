@@ -7,11 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserRegistrationService } from './services/user-registration.service';
 import { SecurityModule } from './modules/security/security.module';
 import { ProductReviewComponent } from './product-review/product-review.component';
+import { ListUsersComponent } from './list-users/list-users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductReviewComponent
+    ProductReviewComponent,
+    ListUsersComponent
   ],
   imports: [
     BrowserModule,
