@@ -27,7 +27,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 
-## Development steps
+## Development steps - #1
 
 * ng new <app name>
 * Change directory to the app folder. <app name>
@@ -302,7 +302,7 @@ model = new RegistrationUser('','','','','','',null,'','SG','');
  const bodyParser = require('body-parser');
 /* end : import libs */
 ```
-* Instantiate andn configure ExpressJS for the backend server side app. The NODE_PORT variable is derived from the operating system environment variable
+* Instantiate and configure ExpressJS for the backend server side app. The NODE_PORT variable is derived from the operating system environment variable.
 ```javascript
 var app = express();
  app.use(bodyParser.urlencoded({ extended: false}));
@@ -314,7 +314,11 @@ var app = express();
  app.use(express.static(__dirname + "/../dist/"));
 
 ```
-* Create an endpoint on the backend server side app
+* Generate angular UI scripts by running ng build. If this is to deploy to cloud environment incorporate --aot and --prod argument.
+```
+ng build 
+```
+* Create an endpoint on the server side server/app.js
 ```javascript
 app.post("/api/user/register", (req, res)=>{
     console.log(req);
@@ -324,7 +328,7 @@ app.post("/api/user/register", (req, res)=>{
     res.status(200).json(user);
  });
 ```
-* Incorporate Express JS listening codes into the app.js
+* Incorporate Express JS listening codes into the server/app.js
 ```javascript
 app.listen(NODE_PORT, function(){
      console.log(`Backend Server started at ${NODE_PORT}`);
@@ -337,4 +341,41 @@ $ export PORT=4000
 # windows 
 $ set PORT=4000
 $ nodemon server/app.js
+```
+# Development steps #2 
+* The following update is to demonstrate how component communicate with one another using the @Input annotation
+* Generate a product review class
+```bash
+ng g class shared/product-review
+```
+* Define all the attributes for the product review class. rating is number, by is string normally is the person who review the product, comment/remarks given by the reviewer, thumbsUp by other reader. Lastly verification flag from the platform owner. (product-review.ts)
+```javascript
+export class ProductReview {
+    constructor(
+        public rating: Number,
+        public by: string,
+        public comment: string,
+        public thumbsUp: Number,
+        public isVerifiedPurchase: boolean
+    ){
+
+    }
+}
+```
+* The product review component is going to reuse the user registration service with a new function that perform a GET All reviews from the backend server. (user-registratio.service.ts)
+```javascript
+public getAllReviews(){
+    return this.httpClient.get<ProductReview[]>(this.productAPIURL + 'reviews', httpOptions);
+
+```
+* Under the app.component.ts define an array list as below where data type is any or we can be specific as ProductReview[]
+```javascript
+reviews: any;
+```
+* Add an initialization codes under the ngOnInit function
+```javascript
+this.userService.getAllReviews()
+      .subscribe(result => {
+        this.reviews = result;
+      })
 ```
