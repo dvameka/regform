@@ -211,7 +211,7 @@ model = new RegistrationUser('','','','','','',null,'','SG','');
     <button type="reset" class="btn btn-danger" (click)="regForm.reset()">Reset</button>
 </div>
 ```
-* Under the app.component.ts onSubmit implemented capturing logic as below and last toggle the flag to display the submitted information.
+* Under the app.component.ts onSubmit implemented capturing logic as below and lastly toggle the isSubmitted flag to true display the submitted information on the template page.
 ```javascript
     onSubmit(){
         console.log(this.model.email);
@@ -260,12 +260,34 @@ model = new RegistrationUser('','','','','','',null,'','SG','');
         </div>
     </div>
 ```
- * Add an empty onChange function to handle the on change event for the nationalities drop down
+ * Add a trigger under the onChange function to handle the on change event for the nationalities drop down when Singaporean is selected. An input ID No. field is dynamically shown on page/template
 ```javascript
     onChange(event){
-
+        console.log(event);
+        if(event === this.nationalities[0].value){
+        this.showSingaporeCitizenId = true;
+        }
     }
-``` 
+```
+* Incorporate the dynamic ID No. field right after the nationality select options.
+```html
+ <div *ngIf="showSingaporeCitizenId" class="form-group">
+    <label for="SGidNo">Singapore ID No.</label>
+    
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">S</span>
+        </div>
+        <input id="SGidNo" name="SGidNo" type="text" #sgidNo="ngModel" class="form-control" [(ngModel)]="model.sgidNo"  value="{{ model.sgidNo}}" required/>
+    </div>
+    
+    <div *ngIf="sgidNo.errors && (sgidNo.touched || isSubmitted)">
+            <div [hidden]="!sgidNo.errors.required && sgidNo.dirty" class="help-block alert alert-danger">
+                ID No. is required.
+            </div>
+    </div>
+</div>
+```
 * Create a directory and app.js file under the project directory using visual studio code (server/app.js)
 * Create server side app (Node JS + ExpressJS), import in express JS, CORS and body-parser
 ```javascript

@@ -18,6 +18,7 @@ export class AppComponent implements OnInit{
                     {desc:'Vietnam', value: 'VN'}];
                     
   isSubmitted: boolean = false;
+  showSingaporeCitizenId = false;
   result: string = "";
   reviews: any;
 
@@ -27,7 +28,7 @@ export class AppComponent implements OnInit{
   
   // when the page load
   ngOnInit() {
-    this.model = new RegistrationUser('','','','','','',null,'','MY','', 0);
+    this.model = new RegistrationUser('','','','','','',null,'','MY','', 0, '');
     this.userService.getAllReviews()
       .subscribe(result => {
         this.reviews = result;
@@ -57,5 +58,10 @@ export class AppComponent implements OnInit{
 
   onChange(event){
     // empty function.
+    //event.target.value
+    console.log(event);
+    if(event === this.nationalities[0].value){
+      this.showSingaporeCitizenId = true;
+    }
   }
 }

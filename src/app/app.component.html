@@ -126,6 +126,23 @@
                         
                     </div>
 
+                    <div *ngIf="showSingaporeCitizenId" class="form-group">
+                        <label for="SGidNo">Singapore ID No.</label>
+                        
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">S</span>
+                            </div>
+                            <input id="SGidNo" name="SGidNo" type="text" #sgidNo="ngModel" class="form-control" [(ngModel)]="model.sgidNo"  value="{{ model.sgidNo}}" required/>
+                        </div>
+                        
+                        <div *ngIf="sgidNo.errors && (sgidNo.touched || isSubmitted)">
+                                <div [hidden]="!sgidNo.errors.required && sgidNo.dirty" class="help-block alert alert-danger">
+                                    ID No. is required.
+                                </div>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="contactNumber">Contact Number</label>
                         <input id="contactNumber"  #contactNumber="ngModel" name="contactNumber" type="text" class="form-control"  [(ngModel)]="model.contactNumber" minlength="8" maxlength="8" pattern="[0-9]*" required/>
@@ -152,18 +169,25 @@
                     </div>
                 </form>
 
+
+                <div class="row">
+                    <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
+                        <h1>Reviews</h1>
+                    </div>
+                </div> 
+                <hr/>  
                 <div *ngFor="let review of reviews">
                    
                     <div>
-                        {{review.rating}}
+                        Rating : {{review.rating}}
                     </div>
                     <div>
                         by {{review.by}}
                     </div>
                     <div>
-                        Review {{review.comment}}
+                        Review :  {{review.comment}}
                     </div>
-                    <hr/>
+                    <br>
                 </div>
     
             </div>
