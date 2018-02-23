@@ -29,10 +29,16 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Development steps - #1
 
-* ng new <app name>
-* Change directory to the app folder. <app name>
-* npm install bootstrap express body-parser cors --save
-* Add bootstrap css and js into the .angular-cli.json
+* Scalfold an angular app using the Angular CLI 
+```
+ng new <app name>
+```
+* Change directory to the angular app folder. <app name>
+* Install both client and server side dependencies with the --save argument in order to register the runtime dependencies.
+```
+npm install bootstrap express body-parser cors --save
+```
+* Add bootstrap css and js to .angular-cli.json. This is to make sure when the angular cli build is executed it will bundle the external styling framework. [Bootstrap v4 get started] (https://getbootstrap.com/docs/4.0/getting-started/introduction/)
 
 ```javascript
 "styles": [
@@ -43,12 +49,12 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
         "../node_modules/bootstrap/dist/js/bootstrap.min.js"
       ],
 ```
-* Generate value object that holds all the user registration information 
+* Generate value object that holds all the user registration information which is will be eventually two way binded to the template/html.
 ```javascript
 ng g class shared/registration-user
 
 ```
-* Implement all the properties for the user registration form.
+* Implement all the attributes/properties for the user registration front end class.
 ```javascript
 export class RegistrationUser {
     constructor(
@@ -69,7 +75,7 @@ export class RegistrationUser {
     }
 }
 ```
-* Import formsModule from angular built in package. Inject it to the imports configuration. (app.module.ts)
+* Import formsModule from angular built in package. Inject it to the imports configuration. (app.module.ts). What is Dependency Injection ? (https://angular.io/guide/dependency-injection)
 
 ```javascript
 import { FormsModule } from '@angular/forms';
@@ -79,7 +85,7 @@ imports: [
     FormsModule
   ],
 ```
-* under the app.component.ts define the initialization declaration for the  user registration model. Third last argument we need to default the nationalities list to SG and the fourth field is a date field therefore we have to init the value to null.
+* Under the app.component.ts define the initialization declaration for the  user registration model. Third last argument we need to default the nationalities list to SG and the fourth field is a date field therefore we have to initialize the value to null.
 
 ```javascript
 model = new RegistrationUser('','','','','','',null,'','SG','');
@@ -101,10 +107,10 @@ model = new RegistrationUser('','','','','','',null,'','SG','');
   ```
   * Bind the rest of the fields. Exception to that the nationalities select list require to an array (complex javascript objec) to be declare under the app.component.ts as below:-
   ```javascript
-    nationalities = [ {desc:'Singapore', value:'SG'}, 
-                    {desc: 'Malaysia', value:'MY'}, 
-                    {desc:'Thailand', value:'TH'},  
-                    {desc:'Vietnam', value: 'VN'}];
+    nationalities = [ {desc:'Singaporean', value:'SG'}, 
+                    {desc: 'Malaysian', value:'MY'}, 
+                    {desc:'Thai', value:'TH'},  
+                    {desc:'Vietnamese', value: 'VN'}];
   ``` 
   
 ```html
@@ -199,7 +205,7 @@ model = new RegistrationUser('','','','','','',null,'','SG','');
         
 
         <div class="row" *ngIf="isSubmitted">
-            {{result}}
+            {{model}}
         </div>
         
     </div>
@@ -261,7 +267,7 @@ model = new RegistrationUser('','','','','','',null,'','SG','');
         </div>
     </div>
 ```
- * Add a trigger under the onChange function to handle the on change event for the nationalities drop down when Singaporean is selected. An input ID No. field is dynamically shown on page/template
+ * Add an event trigger under the onChange function to handle the on change event for the nationalities drop down when nationality is selected as Singaporean an input ID No. field is dynamically shown on page/template.
 ```javascript
     onChange(event){
         console.log(event);
@@ -270,7 +276,7 @@ model = new RegistrationUser('','','','','','',null,'','SG','');
         }
     }
 ```
-* Incorporate the dynamic rendered ID No. field right after the nationality is selected as Singaporean (SG).
+* Incorporate the dynamic rendered ID No. field right after the nationality select box.
 ```html
  <div *ngIf="showSingaporeCitizenId" class="form-group">
     <label for="SGidNo">Singapore ID No.</label>
@@ -288,9 +294,10 @@ model = new RegistrationUser('','','','','','',null,'','SG','');
             </div>
     </div>
 </div>
+# Server side Development (Node JS + Express JS) 
 ```
 * Create a directory and app.js file under the project directory using visual studio code (server/app.js)
-* Create server side app (Node JS + ExpressJS), import in express JS, CORS and body-parser
+* Create server side app (Node JS + ExpressJS), import in the following libraries - express JS, CORS and body-parser
 ```javascript
 /**
  * Server side app
@@ -303,7 +310,7 @@ model = new RegistrationUser('','','','','','',null,'','SG','');
  const bodyParser = require('body-parser');
 /* end : import libs */
 ```
-* Instantiate and configure ExpressJS for the backend server side app. The NODE_PORT variable is derived from the operating system environment variable.
+* Instantiate and configure ExpressJS for the backend server side app. The NODE_PORT variable is derived from the operating system environment variable. The static folder of the expressJS middleware is pointed to the dist directory. This dist directory is generated from the 'ng build' command. Eventually when this app is deployed to the cloud provider as a whole the angular 5 app that we are creating is loaded from the dist directory.
 ```javascript
 var app = express();
  app.use(bodyParser.urlencoded({ extended: false}));
@@ -343,7 +350,7 @@ $ export PORT=4000
 $ set PORT=4000
 $ nodemon server/app.js
 ```
-# Development steps #2 
+# Development steps #2 (@Input) Component 2 component communication.
 * The following update is to demonstrate how component communicate with one another using the @Input annotation
 * Generate a product review class
 ```bash
@@ -428,3 +435,4 @@ export class ProductReviewComponent implements OnInit {
 <br>
 </div>
 ```
+
