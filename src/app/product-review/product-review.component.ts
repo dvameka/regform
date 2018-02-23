@@ -7,7 +7,7 @@ import { ProductReview } from '../shared/product-review';
 })
 export class ProductReviewComponent implements OnInit {
   @Input() reviewsProduct: ProductReview[];
-  title :string = "Reviews"
+  title :string = "Reviews";
   constructor() { }
 
   ngOnInit() {
